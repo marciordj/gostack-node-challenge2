@@ -28,7 +28,11 @@
       {
         "ts": "never"
       }
-    ]
+    ],
+     "max-len": ["error", 120, 2, {
+        "ignorePattern": "^(import|export)",
+        "ignoreUrls": true
+      }]
   },
   "settings": {
     "import/resolver": {
