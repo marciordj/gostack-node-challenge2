@@ -1,4 +1,3 @@
-import { response } from 'express';
 import TransactionsRepository from '../repositories/TransactionsRepository';
 import Transaction from '../models/Transaction';
 
@@ -17,15 +16,15 @@ class CreateTransactionService {
   public execute({ title, type, value }: Request): Transaction {
     const { total } = this.transactionsRepository.getBalance();
 
-    if (type === 'outcome' && total < value) {
-      throw new Error('Você não tem saldo suficiente');
-    }
-
     const transaction = this.transactionsRepository.create({
       title,
       type,
       value,
     });
+
+    if (type === 'outcome' && total < value) {
+      throw new Error('Você não tem saldo suficiente');
+    }
 
     return transaction;
   }
